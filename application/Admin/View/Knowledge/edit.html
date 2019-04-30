@@ -1,0 +1,65 @@
+<include file="Public/header" />
+<!--左侧菜单栏-->
+
+<!--左侧菜单栏 begin-->
+<include file="Public/left" />
+<!--左侧菜单栏 begin-->
+    
+    <!--右侧主操作区-->
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i>
+                <a href="?p=back">首页</a>
+                <span class="crumb-step">&gt;</span>
+                <span class="crumb-name">塑料袋小知识</span>
+                <span class="crumb-step">&gt;</span>
+                <span class="crumb-name">修改内容</span>
+            </div>
+        </div>
+        <div class="crumb-wrap">
+        </div>
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="{:U('modify')}" method="post" id="myform" enctype='multipart/form-data'>
+                    <table class="insert-tab" width="100%">
+                        <input type="hidden" name="id" value="{$info.id}" />
+                        <tbody>
+                            <tr>
+                                <th><i class="require-red">*</i>标题：</th>
+                                <td>
+                                    <input type="text" name="title" value="{$info.title}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>企业概况:</th>
+                                <td>
+                                    <textarea id="ue" style="width: 800px;height: 200px;" name="content" class="common-textarea" cols="60" rows="4">{$info.content}</textarea>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th><i class="require-red">*</i>是否开启：</th>
+                                <td>
+                                    <input type="radio" name="isshow" value="1"  <if condition="$info.isshow eq 1" >checked="checked"</if> >开启
+                                    <input type="radio" name="isshow" value="0"  <if condition="$info.isshow eq 0" >checked="checked"</if> >关闭
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                                </td>
+                            </tr>
+                        </tbody></table>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <!--/右侧主操作区-->
+</div>
+
+</body>
+</html>

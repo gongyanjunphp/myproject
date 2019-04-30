@@ -1,0 +1,133 @@
+<?php if (!defined('THINK_PATH')) exit();?><!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/Public/Admin/css/base.css" />
+    <link rel="stylesheet" href="/Public/Admin/css/login.css" />
+    <!-- <link rel="stylesheet" href="/Public/Admin/css/light.css" /> -->
+    <title>网站后台管理系统</title>
+    <script src="/Public/Admin/js/lufylegend-1.7.7.js" type="text/javascript"></script>
+    <script src="/Public/Admin/js/Smearing.js" type="text/javascript"></script>
+    <script>
+        init(10,"mylegend",500,400,main);
+        var backLayer,meteorLayer;
+        var back,meteor;
+        var maxFrame = 40,indexFrame = 0;
+        function main(){
+            LStage.setDebug(true);
+
+            //加入底板层
+            backLayer = new LSprite();
+            addChild(backLayer);
+            //加入流星层
+            meteorLayer = new LSprite();
+            addChild(meteorLayer);
+
+            //画一个黑色矩形作为背景
+            back = new LGraphics();
+            back.drawRect(0,"",[0,0,LStage.width,LStage.height],true,"black");
+            backLayer.addChild(back);
+
+            //画一个黄色矩形作为一颗流星
+            meteor = new LSprite();
+            meteor.graphics.drawRect(0,"",[0,0,8,8],true,"white");
+            backLayer.addEventListener(LEvent.ENTER_FRAME,onframe);
+        }
+        function onframe(){
+            if(indexFrame > maxFrame){
+                indexFrame = 0;
+                //为每个流星添加一个拖尾
+                var smearing = new Smearing(meteor,50);
+                smearing.x = Math.floor(Math.random() * 250);
+                smearing.y = 0;
+                smearing.to(2,{
+                    x: Math.floor(Math.random() * (500 - 480) + 480),
+                    y: 400
+                });
+                meteorLayer.addChild(smearing);
+            }
+            for(var key in meteorLayer.childList){
+                if(meteorLayer.childList[key].mode == "complete"){
+                    meteorLayer.removeChild(meteorLayer.childList[key]);
+                }
+            }
+            indexFrame ++;
+        }
+    </script>
+
+</head>
+<body>
+<div id="container">
+    <form action="<?php echo U('Loginok');?>" method="post">
+        <div id="bd">
+            <div class="login1">
+                <div class="login-top"><h1 class="logo"></h1></div>
+                <div class="login-input">
+                    <p class="user ue-clear">
+                        <label>用户名</label>
+                        <input type="text" name="name" />
+                    </p>
+                    <p class="password ue-clear">
+                        <label>密&nbsp;&nbsp;&nbsp;码</label>
+                        <input type="password" name="pwd" />
+                    </p>
+                    <p class="yzm ue-clear">
+                        <label>验证码</label>
+                        <input type="text" name="code" />
+                        <cite><img src="<?php echo U('verify');?>" onclick="change(this)" /></cite>
+                    </p>
+                </div>
+                <div class="login-btn ue-clear">
+                    <a class="btn">登录</a>
+                    <div class="remember ue-clear">
+                        <input type="checkbox" id="remember" />
+                        <em></em>
+                        <label for="remember">记住密码</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</form>
+</body>
+<script type="text/javascript" src="/Public/Admin/js/jquery.js"></script>
+<script type="text/javascript" src="/Public/Admin/js/common.js"></script>
+<script type="text/javascript">
+    function change(obj){
+        obj.src = "/index.php/Admin/Login/verify/_/" + Math.random();
+    }
+
+    $('.btn').click(function(){
+        $('form').submit();
+    })
+
+    var height = $(window).height();
+    $("#container").height(height);
+    $("#bd").css("padding-top",height/2 - $("#bd").height()/2);
+
+    $(window).resize(function(){
+        var height = $(window).height();
+        $("#bd").css("padding-top",$(window).height()/2 - $("#bd").height()/2);
+        $("#container").height(height);
+
+    });
+
+    $('#remember').focus(function(){
+        $(this).blur();
+    });
+
+    $('#remember').click(function(e) {
+        checkRemember($(this));
+    });
+
+    function checkRemember($this){
+        if(!-[1,]){
+            if($this.prop("checked")){
+                $this.parent().addClass('checked');
+            }else{
+                $this.parent().removeClass('checked');
+            }
+        }
+    }
+</script>
+</html>

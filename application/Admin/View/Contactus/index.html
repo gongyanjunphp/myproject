@@ -1,0 +1,96 @@
+<include file="Public/header" />
+<!--左侧菜单栏-->
+
+<!--左侧菜单栏 begin-->
+<include file="Public/left" />
+<!--左侧菜单栏 begin-->
+    <!--右侧主操作区-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i>
+                <a href="?p=back">首页</a>
+                <span class="crumb-step">&gt;</span>
+                <span class="crumb-name">联系我们</span>
+            </div>
+        </div>
+        <div class="search-wrap">
+            <div class="search-content">
+            </div>
+        </div>
+        <div class="result-wrap">
+            <form name="myform" id="myform" method="post">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a href="{:U('Admin/Contactus/add')}"><i class="icon-font"></i>添加</a>
+                        <a id="batchDel" href="javascript:void(0)" class="del"><i class="icon-font"></i>批量删除</a>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <table class="result-tab" width="100%" align="center">
+                        <tr>
+                            <th class="tc" width="5%">
+                                <input class="allChoose" name="" type="checkbox">
+                            </th>
+                            <th style="text-align:center"  >单位</th>
+                            <th style="text-align:center"width="300px">地址</th>
+                            <th style="text-align:center">邮政编码</th>
+                            <th style="text-align:center">手机号</th>
+                            <th style="text-align:center">邮箱</th>
+                            <th style="text-align:center">添加时间</th>
+                            <th style="text-align:center">操作</th>
+                        </tr>
+                        <foreach name="contactus_list" item="v">
+                        <tr>
+
+                            <td class="tc" align="center">
+                                <input name="id[]" value={$v.id} type="checkbox">
+                            </td>
+                            <td  align="center" >{$v.company}</td>
+                            <td  align="center">{$v.address}</td>
+                            <td  align="center">{$v.postalcode}</td>
+                            <td  align="center">{$v.telephone}</td>
+                            <td  align="center">{$v.email}</td>
+                            <td  align="center">{$v.createtime}</td>
+                            <td  align="center">
+                                <a class="link-update" href="{:U('edit', 'id='.$v[id])}">修改</a>
+                                <a class="link-del" href="{:U('del', 'id='.$v[id])}">删除</a>
+                            </td>
+                        </tr>
+                        </foreach>
+                        </table>
+                    <div class="list-page">{$str}</div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <!--/右侧主操作区-->
+</div>
+
+</body>
+<script>
+    function del(){
+        return confirm('确定删除该部门？');
+    }
+    // 获取删除按钮，并注册点击事件
+    $('.del').click(function(){
+        // 获取所有已选中的checkbox
+        // $(':checkbox') 获取所有的checkbox标签对象
+        // $(':checkbox:checked') 获取已选中的checkbox
+        // obj_list是一个包含多个标签对象的变量
+        var obj_list = $(':checkbox:checked');
+        // 声明用来保存id字符串的变量
+        ids = "";
+        // 遍历obj_list，将里面的每个值都取出来，并拼接到ids中
+        obj_list.each(function(){
+            ids += $(this).val()+',';
+        })
+        // 将最后一个 , 截取掉
+        ids = ids.substr(0, ids.length-1);
+        //alert(ids);
+        // www.mayoa.com/Dept/dels/id/1,2,3
+        location.href = "__CONTROLLER__/dels/id/" + ids;
+    })
+</script>
+</html>

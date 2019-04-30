@@ -1,0 +1,21 @@
+[ 2019-04-02T09:52:50+08:00 ] 127.0.0.1 /index.php/Admin/Login/__FAVICON__
+ERR: 非法操作:__FAVICON__
+
+[ 2019-04-02T09:53:19+08:00 ] 127.0.0.1 /index.php/Admin/Index/__FAVICON__
+ERR: 非法操作:__FAVICON__
+
+[ 2019-04-02T10:40:29+08:00 ] 127.0.0.1 /index.php/Admin/Honor/__FAVICON__
+ERR: 非法操作:__FAVICON__
+
+[ 2019-04-02T10:48:09+08:00 ] 127.0.0.1 /index.php/Admin/Live/__FAVICON__
+ERR: 非法操作:__FAVICON__
+
+[ 2019-04-02T10:57:53+08:00 ] 127.0.0.1 /index.php/Admin/Goods/__FAVICON__
+ERR: 非法操作:__FAVICON__
+
+[ 2019-04-02T11:00:48+08:00 ] 127.0.0.1 /index.php/Admin/Comprofile/__FAVICON__
+ERR: 非法操作:__FAVICON__
+
+[ 2019-04-02T11:41:19+08:00 ] 127.0.0.1 /index.php/Admin/index/__FAVICON__
+ERR: 非法操作:__FAVICON__
+

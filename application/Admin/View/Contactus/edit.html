@@ -1,0 +1,79 @@
+<include file="Public/header" />
+<!--左侧菜单栏-->
+
+<!--左侧菜单栏 begin-->
+<include file="Public/left" />
+<!--左侧菜单栏 begin-->
+    
+    <!--右侧主操作区-->
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i>
+                <a href="?p=back">首页</a>
+                <span class="crumb-step">&gt;</span>
+                <span class="crumb-name">联系我们</span>
+                <span class="crumb-step">&gt;</span>
+                <span class="crumb-name">修改信息</span>
+            </div>
+        </div>
+        <div class="crumb-wrap">
+            <div class="crumb-list">
+                <i class="icon-font">&#xe06b;</i>
+                <span style="color: red">温馨提示:如果您要上传新的照片的话会把原来的照片覆盖掉,请谨慎操作!</span>
+            </div>
+        </div>
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="{:U('modify')}" method="post" id="myform" enctype='multipart/form-data'>
+                    <table class="insert-tab" width="100%">
+                        <input type="hidden" name="id" value="{$info.id}" />
+                        <tbody>
+                        <tr>
+                            <th>单位:</th>
+                            <td>
+                                <input type="text" name="company" value="{$info.company}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>地址:</th>
+                            <td>
+                                <input type="text" name="address" value="{$info.address}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>邮政编码:</th>
+                            <td>
+                                <input type="text" name="postalcode"  value="{$info.postalcode}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>手机号:</th>
+                            <td>
+                                <input type="text" name="telephone" value="{$info.telephone}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>邮箱:</th>
+                            <td>
+                                <input type="text" name="email" value="{$info.email}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td>
+                                <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                            </td>
+                        </tr>
+                        </tbody></table>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <!--/右侧主操作区-->
+</div>
+
+</body>
+</html>

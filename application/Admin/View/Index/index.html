@@ -1,0 +1,51 @@
+    <include file="Public/header" />
+    <!--左侧菜单栏-->
+    
+    <!--左侧菜单栏 begin-->
+   <include file="Public/left" />
+    <!--左侧菜单栏 begin-->
+    
+    <!--右侧主操作区-->
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <marquee style="WIDTH:101%" scrollamount="6" direction="left">
+            <div class="crumb-list">
+                <i class="icon-font">&#xe06b;</i>
+                <span>{$str}{$Think.SESSION.name}&nbsp&nbsp 欢迎使用网站后台管理系统。&nbsp&nbsp[{$weatherData['results'][0]['currentCity']}]&nbsp&nbsp今天是:{$weatherData['date']}&nbsp&nbsp{$weatherData['results'][0]['weather_data'][0]['date']}&nbsp&nbsp&nbsp&nbsp温度:&nbsp&nbsp{$weatherData['results'][0]['weather_data'][0]['temperature']}&nbsp&nbsp{$weatherData['result']['windpower']}&nbsp&nbsp天气：{$weatherData['results'][0]['weather_data'][0]['weather']}&nbsp&nbsp<img src="{$weatherData['results'][0]['weather_data'][0]['dayPictureUrl']}" width="20" height="20">～<img src="{$weatherData['results'][0]['weather_data'][0]['nightPictureUrl']}" width="20" height="20">&nbsp&nbsp&nbsp&nbsp{$weatherData['results'][0]['weather_data'][0]['wind']}</span>
+            </div>
+            </marquee>
+        </div>
+        <div class="result-wrap">
+            <div class="result-title">
+                <h1>系统基本信息</h1>
+            </div>
+            <div class="result-content">
+                <ul class="sys-info-list">
+                    <li>
+                        <label class="res-lab">操作系统</label><span class="res-info"><script>document.write(getOS());</script></span>
+                    </li>
+                    <li>
+                        <label class="res-lab">服务器地址</label><span class="res-info">{$ip}</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">网站访问量</label><span class="res-info">{$Think.SESSION.hits}</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">上传附件限制</label><span class="res-info">2M</span>
+                    </li>
+                    <li>
+                        <label class="res-lab">北京时间</label>
+                        <span class="res-info" id='nowtime' onload="ShowTime()"></span>
+                    </li>
+                    <li>
+                        <label class="res-lab">服务器域名</label><span class="res-info"><span id="host">localhost</span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+
+</body>
+</html>

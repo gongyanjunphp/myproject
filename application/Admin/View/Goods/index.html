@@ -1,0 +1,105 @@
+<include file="Public/header" />
+<!--左侧菜单栏-->
+
+<!--左侧菜单栏 begin-->
+<include file="Public/left" />
+<!--左侧菜单栏 begin-->
+    <!--右侧主操作区-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i>
+                <a href="?p=back">首页</a>
+                <span class="crumb-step">&gt;</span>
+                <span class="crumb-name">产品介绍</span>
+            </div>
+        </div>
+        <div class="search-wrap">
+            <div class="search-content">
+                <form action="{:U('index')}" method="post">
+                    <table class="search-tab">
+                        <tr>
+                            <th width="70">产品名称:</th>
+                            <td><input class="common-text" placeholder="请输入产品名称" name="keywords" value="" id="" type="text"></td>
+                            <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="result-wrap">
+            <form name="myform" id="myform" method="post">
+                <div class="result-title">
+                    <div class="result-list">
+                        <a href="{:U('Admin/Goods/add')}"><i class="icon-font"></i>添加</a>
+                        <a id="batchDel" href="javascript:void(0)" class="del"><i class="icon-font"></i>批量删除</a>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <table class="result-tab" width="100%" align="center">
+                        <tr>
+                            <th class="tc" width="5%">
+                                <input class="allChoose" name="" type="checkbox">
+                            </th>
+                            <th style="text-align:center" width="10%">产品名称</th>
+                            <th style="text-align:center" width="20%">缩略图</th>
+                            <th style="text-align:center" width="10%">添加时间</th>
+                            <th style="text-align:center" width="10%">是否开启</th>
+                            <th style="text-align:center" width="10%">操作</th>
+                        </tr>
+                        <foreach name="goods_list" item="v">
+                        <tr>
+
+                            <td class="tc" align="center">
+                                <input name="id[]" value={$v.id} type="checkbox">
+                            </td>
+                            <td  align="center" >{$v.title}</td>
+                            <td  align="center"><img src="{$v.picpath|ltrim=###,'.'}" style="width: 90px; height: 40px"></td>
+                            <td  align="center">{$v.createtime}</td>
+                            <if condition="$v.status eq 1">
+                            <td  align="center">开启</td>
+                            <else />
+                            <td  align="center">关闭</td>
+                            </if>
+                            <td  align="center">
+                                <a class="link-update" href="{:U('Admin/Goods/edit', 'id='.$v[id])}">修改</a>
+                                <a class="link-del" href="{:U('Admin/Goods/del', 'id='.$v[id])}">删除</a>
+                            </td>
+                        </tr>
+                        </foreach>
+                        </table>
+                    <div class="list-page">{$str}</div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <!--/右侧主操作区-->
+</div>
+
+</body>
+<script>
+    function del(){
+        return confirm('确定删除该部门？');
+    }
+    // 获取删除按钮，并注册点击事件
+    $('.del').click(function(){
+        // 获取所有已选中的checkbox
+        // $(':checkbox') 获取所有的checkbox标签对象
+        // $(':checkbox:checked') 获取已选中的checkbox
+        // obj_list是一个包含多个标签对象的变量
+        var obj_list = $(':checkbox:checked');
+        // 声明用来保存id字符串的变量
+        ids = "";
+        // 遍历obj_list，将里面的每个值都取出来，并拼接到ids中
+        obj_list.each(function(){
+            ids += $(this).val()+',';
+        })
+        // 将最后一个 , 截取掉
+        ids = ids.substr(0, ids.length-1);
+        //alert(ids);
+        // www.mayoa.com/Dept/dels/id/1,2,3
+        location.href = "__CONTROLLER__/dels/id/" + ids;
+    })
+</script>
+</html>

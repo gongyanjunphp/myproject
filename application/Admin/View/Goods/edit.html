@@ -1,0 +1,111 @@
+<include file="Public/header" />
+<!--左侧菜单栏-->
+
+<!--左侧菜单栏 begin-->
+<include file="Public/left" />
+<!--左侧菜单栏 begin-->
+    
+    <!--右侧主操作区-->
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i>
+                <a href="?p=back">首页</a>
+                <span class="crumb-step">&gt;</span>
+                <span class="crumb-name">产品介绍</span>
+                <span class="crumb-step">&gt;</span>
+                <span class="crumb-name">修改信息</span>
+            </div>
+        </div>
+        <div class="crumb-wrap">
+            <div class="crumb-list">
+                <i class="icon-font">&#xe06b;</i>
+                <span style="color: red">温馨提示:如果您要上传新的照片的话会把原来的照片覆盖掉,请谨慎操作!</span>
+            </div>
+        </div>
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="{:U('modify')}" method="post" id="myform" enctype='multipart/form-data'>
+                    <table class="insert-tab" width="100%">
+                        <input type="hidden" name="id" value="{$info.id}" />
+                        <input type="hidden" id="urlfile" name="picpath"  />
+                        <tbody>
+                        <tr>
+                            <th>标题:</th>
+                            <td>
+                                <input type="text" name="title" value="{$info.title}"/>
+                            </td>
+                        </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>图片上传：</th>
+                                <td>
+                                    <div class="layui-upload">
+                                        <button type="button" class="layui-btn" id="test1">修改图片</button>
+                                        <div class="layui-upload-list">
+                                            <img class="layui-upload-img" id="demo" src="{$info.picpath|ltrim=###,'.'}" width="800px" height="200px">
+                                            <p id="demoText"></p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>是否开启：</th>
+                                <td>
+                                    <input type="radio" name="status" value="1"  <if condition="$info.status eq 1" >checked="checked"</if> >开启
+                                    <input type="radio" name="status" value="0"  <if condition="$info.status eq 0" >checked="checked"</if> >关闭
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                                </td>
+                            </tr>
+                        </tbody></table>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <!--/右侧主操作区-->
+</div>
+
+</body>
+<script>
+    layui.use('upload', function(){
+        var $ = layui.jquery
+            ,upload = layui.upload;
+
+        //普通图片上传
+        var uploadInst = upload.render({
+
+            elem: '#test1'
+            ,url: "{:U('fileOk')}"
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }else{
+                    $('#urlfile').val(res.urlfile); //图片链接（base64）
+                    return layer.msg('上传成功');
+                }
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
+    });
+</script>
+</html>

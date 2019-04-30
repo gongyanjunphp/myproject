@@ -1,0 +1,10 @@
+[ 2019-03-30T01:11:32+08:00 ] 127.0.0.1 /index.php/Home/Index/Index.html
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+ [ SQL语句 ] : SELECT * FROM `sb_knowledge` WHERE `isshow` = 1 ORDER BY id,desc 
+
+[ 2019-03-30T01:38:49+08:00 ] 127.0.0.1 /index.php/Index/knowledge/id/7.html
+ERR: 模板不存在:./application/Home/View/Index/knowledge.html
+
+[ 2019-03-30T07:01:50+08:00 ] 127.0.0.1 /
+ERR: SQLSTATE[HY000] [1045] Access denied for user 'project'@'localhost' (using password: YES)
+
